@@ -1,0 +1,28 @@
+generator client {
+	provider = "prisma-client-js"
+}
+
+datasource db {
+	provider = "mysql"
+	url = env( "DB_URL" )
+}
+
+model Entry {
+	id 				Int 		@id @default( autoincrement() )
+	img_url_full 	String
+	img_url_thumb 	String
+	caption 		String
+	date 			DateTime 	@db.Date
+	likes 			Int 		@default( 0 )
+	views 			Int 		@default( 0 )
+	comments 		Comment[]
+}
+
+model Comment {
+	id 				Int 		@id @default( autoincrement() )
+	entry 			Entry 		@relation( fields: [ entryId ], references: [ id ] )
+	entryId 		Int
+	name			String
+	content			String
+	date 			DateTime 	@db.Date
+}
