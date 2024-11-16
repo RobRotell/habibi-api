@@ -1,2 +1,1 @@
-# habibi-api
-Backend for Habibi
+Habibi API
